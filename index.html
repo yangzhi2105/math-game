@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凑十法加法小游戏</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        .game-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .question {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        input[type="number"] {
+            font-size: 1.5rem;
+            padding: 10px;
+            width: 100px;
+            text-align: center;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #0078d4;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005a9e;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>凑十法加法小游戏</h1>
+    <div class="game-container">
+        <div class="question" id="question">7 + ? = 10</div>
+        <input type="number" id="answer" placeholder="你的答案">
+        <button onclick="checkAnswer()">提交</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        let number1 = Math.floor(Math.random() * 9) + 1; // Generate a random number between 1 and 9
+        const questionElement = document.getElementById('question');
+        const resultElement = document.getElementById('result');
+        const answerInput = document.getElementById('answer');
+
+        // Update the question
+        function updateQuestion() {
+            number1 = Math.floor(Math.random() * 9) + 1;
+            questionElement.textContent = `${number1} + ? = 10`;
+            resultElement.textContent = '';
+            answerInput.value = '';
+        }
+
+        // Check the answer
+        function checkAnswer() {
+            const userAnswer = parseInt(answerInput.value, 10);
+            const correctAnswer = 10 - number1;
+
+            if (userAnswer === correctAnswer) {
+                resultElement.textContent = '✅ 正确！再试一个吧！';
+                // Delay updating the question to let the user see the result
+                setTimeout(updateQuestion, 1500);
+            } else {
+                resultElement.textContent = `❌ 错误！正确答案是 ${correctAnswer}。`;
+            }
+        }
+
+        // Initialize the first question
+        updateQuestion();
+    </script>
+</body>
+</html>
